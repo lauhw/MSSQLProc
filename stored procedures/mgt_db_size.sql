@@ -9,7 +9,7 @@ as
 begin
 
 /*
-15-jun-11,lhw
+15-jun-11,lau@ciysys.com
 -show the current database size & info.
 
 Example:

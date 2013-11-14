@@ -10,14 +10,14 @@ returns datetime
 begin
 
 /*
-9-may-12,lhw
+9-may-12,lau@ciysys.com
 -parse the date+time string and returns datetime type.
 
-select 
-	dbo.fn_from_sys_date('20120509174210'),
-	dbo.fn_from_sys_date('20120509'),
-	dbo.fn_from_sys_date('')
-	--, dbo.fn_from_sys_date('12340234')
+	select 
+		dbo.fn_from_sys_date('20120509174210'),
+		dbo.fn_from_sys_date('20120509'),
+		dbo.fn_from_sys_date('')
+		--, dbo.fn_from_sys_date('12340234')
 	
 
 */

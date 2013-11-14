@@ -10,7 +10,7 @@ returns nvarchar(50)
 begin
 
 /*
-9-may-12,lhw
+9-may-12,lau@ciysys.com
 -format the date value to human readable format.	
 
 select dbo.fn_to_sys_date(getdate())

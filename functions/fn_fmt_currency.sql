@@ -25,6 +25,8 @@ begin
 		dbo.fn_fmt_currency(123456.7890, 2)
 		, dbo.fn_fmt_currency(123456.7890, 8)
 		, dbo.fn_fmt_currency(123456, 0)
+		, dbo.fn_fmt_currency(5, 0)
+		, dbo.fn_fmt_currency(5, 3)
 		, dbo.fn_fmt_currency(123456, -3)
 		, dbo.fn_fmt_currency(2143422345.6897234, 6)
 		, dbo.fn_fmt_currency(2143422345.6897234, 8)
@@ -45,7 +47,7 @@ result:
 	set @s = cast(@value as nvarchar)
 	
 	-- extract the integer 
-	set @int = left(@s, charindex('.', @s))
+	set @int = left(@s, charindex('.', @s) - 1)
 
 	-- see if there is any need to adding ',' symbol
 	if len(@int) > 3

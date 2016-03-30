@@ -1,4 +1,3 @@
-
 if exists(
 	select *
 	from sys.objects
@@ -42,10 +41,12 @@ begin
 		union all select 'd.dd88@d,com'
 		union all select 'd,dd88@d.com'
 		union all select 'test @d.com'
+		union all select 'test.@d.com'			--30-mar-16-bug fixed
 		union all select 't#@d.com'
 		union all select 't#@d...com'
 		union all select 'omer.aslam@gmail.com'
 		union all select 'academy_melaka@adonis-beauty.com'
+
 	) as a0
 
 */
@@ -81,6 +82,15 @@ begin
 		return 0
 	end
 
+	--<<<
+	--30-mar-16-bug fixed
+	set @pos2 = charindex('.', @email)
+	if @pos2 + 1 = @pos
+	begin
+		return 0
+	end
+	--<<<
+
     set @pos2 = charindex('.', @email, @pos + 1)
     if ((@pos2 < 0) or (@pos2 < @pos) or (@pos + 1 = @pos2))
 	begin
@@ -103,6 +113,7 @@ begin
 	begin
 
 		set @c = substring(@email, @i, 1)
+
 		if (charindex(@c, @EMAIL_ADDR_ALLOW_CHAR) = 0)
 		begin
 			return 0 

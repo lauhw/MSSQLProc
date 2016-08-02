@@ -36,6 +36,8 @@ sample:
 		, dbo.fn_fmt_value(2143422345.6897234, 'm6') 'm6'
 		, dbo.fn_fmt_value(2143422345.6897234, 'm8') 'm8'
 
+		, dbo.fn_fmt_value(24434722345.6897234, 'b') 'space'
+
 */
 
 	-- ==========================================================
@@ -47,6 +49,7 @@ sample:
 		, @dt datetime
 		, @decimal_value numeric(20, 8)
 		, @no_of_digit int
+		, @1k float
 
 	-- ==========================================================
 	-- process
@@ -129,7 +132,22 @@ sample:
 					+ convert(nvarchar, @dt, 108)
 
 	end
+	else if @fmt = 'b'
+	begin
 
+		--8-nov-15,lhw-format the value into storage space.
+		set @1k = 1024.0
+		set @decimal_value = cast(@value as float)
+
+		set @s = case 
+					when @decimal_value = 0 then '0 byte'
+					when @decimal_value < power(@1k, 1) then cast(@decimal_value / power(@1k, 0) as varchar) + 'bytes'
+					when @decimal_value < power(@1k, 2) then cast(cast(@decimal_value / power(@1k, 1) as numeric(15,1)) as varchar) + 'KB'
+					when @decimal_value < power(@1k, 3) then cast(cast(@decimal_value / power(@1k, 2) as numeric(15,1)) as varchar) + 'MB'
+					when @decimal_value < power(@1k, 4) then cast(cast(@decimal_value / power(@1k, 3) as numeric(15,1)) as varchar) + 'GB'
+				end
+
+	end
 
 	-- ==========================================================
 	-- cleanup

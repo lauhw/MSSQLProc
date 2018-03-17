@@ -54,7 +54,7 @@ go
 
 if not exists(
 	select *
-	from sys.objects
+	from sys.indexes
 	where name = 'IX_tb_sys_prop_2'
 )
 begin
